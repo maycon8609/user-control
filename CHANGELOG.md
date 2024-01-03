@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/maycon8609/user-control/compare/v1.1.0...v1.1.1) (2024-01-03)
+
+
+### Bug Fixes
+
+* fix lint erros ([d0c06f7](https://github.com/maycon8609/user-control/commit/d0c06f70bc4691bba830394107f7783df31393c4))
+
 # [1.1.0](https://github.com/maycon8609/user-control/compare/v1.0.0...v1.1.0) (2024-01-03)
 
 
