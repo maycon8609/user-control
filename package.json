@@ -4,6 +4,7 @@
   "description": "Aplicação para controles de usuários, os mesmos podem ser cadastrados com cpf e nome.",
   "main": "index.js",
   "scripts": {
+    "lint:server": "eslint server --ext .ts --fix",
     "pre-push": "echo \"pre-push script\" && exit 1",
     "prepare": "husky install"
   },
@@ -15,8 +16,13 @@
     "@commitlint/config-conventional": "^18.4.3",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
+    "@typescript-eslint/eslint-plugin": "^6.17.0",
+    "@typescript-eslint/parser": "^6.17.0",
+    "eslint": "^8.56.0",
+    "eslint-plugin-prettier": "^5.1.2",
     "husky": "^8.0.3",
     "lint-staged": "^15.2.0",
+    "prettier": "^3.1.1",
     "semantic-release": "^22.0.12"
   }
 }

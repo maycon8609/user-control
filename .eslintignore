@@ -1,0 +1,12 @@
+node_modules
+coverage
+dist
+public
+assets/*
+.vscode
+
+.jest
+.prettierignore
+.gitattributes
+.gitignore
+package-lock.json
