@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 
-import { User } from "@users/domain/User"
+import { User } from '@users/domain/User'
 import { exceptionType } from '@shared/enum/exceptionType'
 import { statusCode } from '@shared/enum/statusCode'
 import { BadRequestError } from '@shared/error/badRequestError'
@@ -12,10 +12,14 @@ import { returnNumericCharacters } from '@shared/utils/returnNumericCharacters'
 import type { IUserService } from './types'
 
 export class UserController {
-  constructor(private readonly userService: IUserService) { }
+  constructor(private readonly userService: IUserService) {}
 
-  private async validateData(field: string, requiredFieldMessage?: string): Promise<void> {
-    const requiredMessageException = requiredFieldMessage ?? 'Mandatory fields were not provided.'
+  private async validateData(
+    field: string,
+    requiredFieldMessage?: string
+  ): Promise<void> {
+    const requiredMessageException =
+      requiredFieldMessage ?? 'Mandatory fields were not provided.'
 
     if (!field) {
       throw new RequiredField(requiredMessageException)
@@ -29,8 +33,14 @@ export class UserController {
   async createUser(request: Request, response: Response): Promise<Response> {
     const { cpf, name } = request.body
 
-    await this.validateData(cpf, 'The cpf field is mandatory and was not provided, check and try again.')
-    await this.validateData(name, 'The name field is mandatory and was not provided, check and try again.')
+    await this.validateData(
+      cpf,
+      'The cpf field is mandatory and was not provided, check and try again.'
+    )
+    await this.validateData(
+      name,
+      'The name field is mandatory and was not provided, check and try again.'
+    )
 
     const normalizedCpf = returnNumericCharacters(cpf)
 
@@ -72,7 +82,10 @@ export class UserController {
     const { cpf } = request.params
     const { name } = request.body
 
-    await this.validateData(name, 'The name field is mandatory and was not provided, check and try again.')
+    await this.validateData(
+      name,
+      'The name field is mandatory and was not provided, check and try again.'
+    )
 
     const normalizedCpf = returnNumericCharacters(cpf)
 
@@ -101,6 +114,8 @@ export class UserController {
     }
 
     await this.userService.deleteUser(normalizedCpf)
-    return response.status(statusCode.OK).json({ message: 'User successfully deleted.' })
+    return response
+      .status(statusCode.OK)
+      .json({ message: 'User successfully deleted.' })
   }
 }

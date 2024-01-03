@@ -18,11 +18,10 @@ export class UserRepositoryInMemory implements IUserRepository {
   }
 
   async update(user: IUser): Promise<IUser> {
-    const filteredUsers = this.users.filter(mappedUser => mappedUser.cpf !== user.cpf)
-    const updatedUsers = [
-      ...filteredUsers,
-      user
-    ]
+    const filteredUsers = this.users.filter(
+      mappedUser => mappedUser.cpf !== user.cpf
+    )
+    const updatedUsers = [...filteredUsers, user]
     this.users = updatedUsers
     return user
   }

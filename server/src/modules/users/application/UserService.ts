@@ -1,12 +1,12 @@
-import { ConflictError } from "@shared/error/conflictError"
-import { exceptionType } from "@shared/enum/exceptionType"
-import { NotFoundError } from "@shared/error/notFoundError"
-import { User } from "@users/domain/User"
-import type { IUser, IUserRepository } from "@users/domain/types"
-import type { IUserService } from "./types"
+import { ConflictError } from '@shared/error/conflictError'
+import { exceptionType } from '@shared/enum/exceptionType'
+import { NotFoundError } from '@shared/error/notFoundError'
+import { User } from '@users/domain/User'
+import type { IUser, IUserRepository } from '@users/domain/types'
+import type { IUserService } from './types'
 
 export class UserService implements IUserService {
-  constructor(private readonly userRepository: IUserRepository) { }
+  constructor(private readonly userRepository: IUserRepository) {}
 
   async createUser(user: User): Promise<IUser> {
     const existentUser = await this.userRepository.findByCpf(user.cpf)

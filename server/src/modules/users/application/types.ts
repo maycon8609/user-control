@@ -1,4 +1,4 @@
-import { User } from "@users/domain/User"
+import { User } from '@users/domain/User'
 
 export interface IUserService {
   createUser(user: User): Promise<User>

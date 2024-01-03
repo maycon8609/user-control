@@ -11,7 +11,7 @@ const PORT = 3000
 
 app.use(corsMiddleware)
 app.use(express.json())
-app.use("/", useRouter.router)
+app.use('/', useRouter.router)
 app.use(errorMiddleware)
 
 app.listen(PORT, () => {
