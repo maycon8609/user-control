@@ -1,6 +1,6 @@
-import type { IUser, IUserRepository } from "@users/domain/types"
+import type { IUser, IUserRepository } from '@users/domain/types'
 
-import { query } from "@shared/infra/database/postgres"
+import { query } from '@shared/infra/database/postgres'
 
 export class UserRepository implements IUserRepository {
   async create(user: IUser): Promise<IUser> {
@@ -17,7 +17,7 @@ export class UserRepository implements IUserRepository {
   }
 
   async getAll(): Promise<IUser[] | []> {
-    const result = await query('SELECT * FROM users');
+    const result = await query('SELECT * FROM users')
     return result.rows
   }
 

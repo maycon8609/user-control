@@ -1,10 +1,9 @@
 import { Request, Response } from 'express'
-import { UserRepositoryInMemory } from "@users/infra/UserRepositoryInMemory"
+import { UserRepositoryInMemory } from '@users/infra/UserRepositoryInMemory'
 import { ConflictError } from '@shared/error/conflictError'
 import { RequiredField } from '@shared/error/requiredField'
-import { UserService } from "./UserService"
-import { UserController } from "./UserController"
-
+import { UserService } from './UserService'
+import { UserController } from './UserController'
 
 describe('[modules:users]: application -> UserController', () => {
   describe('UserController.createUser', () => {
@@ -16,7 +15,9 @@ describe('[modules:users]: application -> UserController', () => {
       const userService = new UserService(userRepository)
       const userController = new UserController(userService)
 
-      await expect(() => userController.createUser(request, response)).rejects.toBeInstanceOf(RequiredField)
+      await expect(() =>
+        userController.createUser(request, response)
+      ).rejects.toBeInstanceOf(RequiredField)
     })
 
     it('should return a RequiredField exception when not informing the name field', async () => {
@@ -27,18 +28,24 @@ describe('[modules:users]: application -> UserController', () => {
       const userService = new UserService(userRepository)
       const userController = new UserController(userService)
 
-      await expect(() => userController.createUser(request, response)).rejects.toBeInstanceOf(RequiredField)
+      await expect(() =>
+        userController.createUser(request, response)
+      ).rejects.toBeInstanceOf(RequiredField)
     })
 
     it('should return a ConflictError exception when the cpf entered is invalid', async () => {
-      const request = { body: { cpf: '1234567890', name: 'John Doe' } } as Request
+      const request = {
+        body: { cpf: '1234567890', name: 'John Doe' }
+      } as Request
       const response = {} as Response
 
       const userRepository = new UserRepositoryInMemory()
       const userService = new UserService(userRepository)
       const userController = new UserController(userService)
 
-      await expect(() => userController.createUser(request, response)).rejects.toBeInstanceOf(ConflictError)
+      await expect(() =>
+        userController.createUser(request, response)
+      ).rejects.toBeInstanceOf(ConflictError)
     })
 
     it('should return a user when creating the same', async () => {
@@ -49,7 +56,11 @@ describe('[modules:users]: application -> UserController', () => {
       const response = {
         status: (code: number) => {
           statusCode = code
-          return { json: (data: any) => { jsonResult = data } }
+          return {
+            json: (data: any) => {
+              jsonResult = data
+            }
+          }
         }
       } as Response
 
@@ -73,18 +84,27 @@ describe('[modules:users]: application -> UserController', () => {
       const userService = new UserService(userRepository)
       const userController = new UserController(userService)
 
-      await expect(() => userController.findUserByCpf(request, response)).rejects.toBeInstanceOf(ConflictError)
+      await expect(() =>
+        userController.findUserByCpf(request, response)
+      ).rejects.toBeInstanceOf(ConflictError)
     })
 
     it('should return a user when it exists', async () => {
       const requestBody = { cpf: '03372977033', name: 'John Doe' }
-      const request = { body: requestBody, params: { cpf: requestBody.cpf } } as any as Request
+      const request = {
+        body: requestBody,
+        params: { cpf: requestBody.cpf }
+      } as any as Request
       let statusCode = 0
       let jsonResult: any
       const response = {
         status: (code: number) => {
           statusCode = code
-          return { json: (data: any) => { jsonResult = data } }
+          return {
+            json: (data: any) => {
+              jsonResult = data
+            }
+          }
         }
       } as Response
 
@@ -108,7 +128,11 @@ describe('[modules:users]: application -> UserController', () => {
       const response = {
         status: (code: number) => {
           statusCode = code
-          return { json: (data: any) => { jsonResult = data } }
+          return {
+            json: (data: any) => {
+              jsonResult = data
+            }
+          }
         }
       } as Response
 
@@ -130,7 +154,11 @@ describe('[modules:users]: application -> UserController', () => {
       const response = {
         status: (code: number) => {
           statusCode = code
-          return { json: (data: any) => { jsonResult = data } }
+          return {
+            json: (data: any) => {
+              jsonResult = data
+            }
+          }
         }
       } as Response
 
@@ -148,36 +176,53 @@ describe('[modules:users]: application -> UserController', () => {
 
   describe('UserController.updateUser', () => {
     it('should return a RequiredField exception when not informing the name field', async () => {
-      const request = { body: {}, params: { cpf: '03372977033' } } as any as Request
+      const request = {
+        body: {},
+        params: { cpf: '03372977033' }
+      } as any as Request
       const response = {} as Response
 
       const userRepository = new UserRepositoryInMemory()
       const userService = new UserService(userRepository)
       const userController = new UserController(userService)
 
-      await expect(() => userController.updateUser(request, response)).rejects.toBeInstanceOf(RequiredField)
+      await expect(() =>
+        userController.updateUser(request, response)
+      ).rejects.toBeInstanceOf(RequiredField)
     })
 
     it('should return a ConflictError exception when the cpf entered is invalid', async () => {
-      const request = { body: { name: 'John Doe' }, params: { cpf: '1234567890' } } as any as Request
+      const request = {
+        body: { name: 'John Doe' },
+        params: { cpf: '1234567890' }
+      } as any as Request
       const response = {} as Response
 
       const userRepository = new UserRepositoryInMemory()
       const userService = new UserService(userRepository)
       const userController = new UserController(userService)
 
-      await expect(() => userController.updateUser(request, response)).rejects.toBeInstanceOf(ConflictError)
+      await expect(() =>
+        userController.updateUser(request, response)
+      ).rejects.toBeInstanceOf(ConflictError)
     })
 
     it('should return a user when updating it', async () => {
       const cpf = '03372977033'
-      const request = { body: { cpf, name: 'John Doe' }, params: { cpf } } as any as Request
+      const request = {
+        body: { cpf, name: 'John Doe' },
+        params: { cpf }
+      } as any as Request
       let statusCode = 0
       let jsonResult: any
       const response = {
         status: (code: number) => {
           statusCode = code
-          return { json: (data: any) => { jsonResult = data } }
+          return {
+            json: (data: any) => {
+              jsonResult = data
+            }
+          }
         }
       } as Response
 
@@ -188,7 +233,10 @@ describe('[modules:users]: application -> UserController', () => {
       await userController.createUser(request, response)
 
       const updatedName = 'Carl Johnson'
-      const updateRequest = { body: { name: updatedName }, params: { cpf } } as any as Request
+      const updateRequest = {
+        body: { name: updatedName },
+        params: { cpf }
+      } as any as Request
       await userController.updateUser(updateRequest, response)
 
       expect(statusCode).toBe(200)
@@ -205,18 +253,27 @@ describe('[modules:users]: application -> UserController', () => {
       const userService = new UserService(userRepository)
       const userController = new UserController(userService)
 
-      await expect(() => userController.deleteUser(request, response)).rejects.toBeInstanceOf(ConflictError)
+      await expect(() =>
+        userController.deleteUser(request, response)
+      ).rejects.toBeInstanceOf(ConflictError)
     })
 
     it('should delete a user when it exists', async () => {
       const requestBody = { cpf: '03372977033', name: 'John Doe' }
-      const request = { body: requestBody, params: { cpf: requestBody.cpf } } as any as Request
+      const request = {
+        body: requestBody,
+        params: { cpf: requestBody.cpf }
+      } as any as Request
       let statusCode = 0
       let jsonResult: any
       const response = {
         status: (code: number) => {
           statusCode = code
-          return { json: (data: any) => { jsonResult = data } }
+          return {
+            json: (data: any) => {
+              jsonResult = data
+            }
+          }
         }
       } as Response
 

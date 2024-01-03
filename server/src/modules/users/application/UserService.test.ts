@@ -12,7 +12,9 @@ describe('[modules:users]: application -> UserService', () => {
       const userData = { cpf: '03372977033', name: 'John Doe' }
       await userService.createUser(userData)
 
-      await expect(() => userService.createUser(userData)).rejects.toBeInstanceOf(ConflictError)
+      await expect(() =>
+        userService.createUser(userData)
+      ).rejects.toBeInstanceOf(ConflictError)
     })
 
     it('should create a new user when it does not yet exist', async () => {
@@ -32,7 +34,9 @@ describe('[modules:users]: application -> UserService', () => {
       const userService = new UserService(userRepository)
       const userCpf = '03372977033'
 
-      await expect(() => userService.findUserByCpf(userCpf)).rejects.toBeInstanceOf(NotFoundError)
+      await expect(() =>
+        userService.findUserByCpf(userCpf)
+      ).rejects.toBeInstanceOf(NotFoundError)
     })
 
     it('should return a user when it exists', async () => {
@@ -41,7 +45,7 @@ describe('[modules:users]: application -> UserService', () => {
 
       const userData = { cpf: '03372977033', name: 'John Doe' }
       await userService.createUser(userData)
-      let users = await userService.findUserByCpf(userData.cpf)
+      const users = await userService.findUserByCpf(userData.cpf)
 
       expect(users).toEqual(userData)
     })
@@ -52,7 +56,7 @@ describe('[modules:users]: application -> UserService', () => {
       const userRepository = new UserRepositoryInMemory()
       const userService = new UserService(userRepository)
 
-      let users = await userService.getAllUsers()
+      const users = await userService.getAllUsers()
 
       expect(users).toEqual([])
     })
@@ -63,7 +67,7 @@ describe('[modules:users]: application -> UserService', () => {
 
       const userData = { cpf: '03372977033', name: 'John Doe' }
       await userService.createUser(userData)
-      let users = await userService.getAllUsers()
+      const users = await userService.getAllUsers()
 
       expect(users).toEqual([userData])
     })
@@ -75,7 +79,9 @@ describe('[modules:users]: application -> UserService', () => {
       const userService = new UserService(userRepository)
       const userData = { cpf: '03372977033', name: 'John Doe' }
 
-      await expect(() => userService.updateUser(userData)).rejects.toBeInstanceOf(NotFoundError)
+      await expect(() =>
+        userService.updateUser(userData)
+      ).rejects.toBeInstanceOf(NotFoundError)
     })
 
     it('should return user data when it is updated', async () => {
@@ -86,7 +92,7 @@ describe('[modules:users]: application -> UserService', () => {
       await userService.createUser(createUserData)
 
       const updatedUserData = { cpf: '03372977033', name: 'Carl Johnson' }
-      let updatedUser = await userService.updateUser(updatedUserData)
+      const updatedUser = await userService.updateUser(updatedUserData)
 
       expect(updatedUser).toEqual(updatedUserData)
     })
@@ -98,7 +104,9 @@ describe('[modules:users]: application -> UserService', () => {
       const userService = new UserService(userRepository)
       const userCpf = '03372977033'
 
-      await expect(() => userService.deleteUser(userCpf)).rejects.toBeInstanceOf(NotFoundError)
+      await expect(() =>
+        userService.deleteUser(userCpf)
+      ).rejects.toBeInstanceOf(NotFoundError)
     })
 
     it('should delete a user when it exists', async () => {

@@ -1,5 +1,5 @@
 export function isValidCpf(cpf: string): boolean {
-  let cpfData = cpf.replace(/\D/g, '')
+  const cpfData = cpf.replace(/\D/g, '')
 
   if (cpfData.length !== 11) {
     return false
